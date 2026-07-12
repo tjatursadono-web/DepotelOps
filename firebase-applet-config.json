@@ -1,9 +1,9 @@
 {
-  apiKey: "AIzaSyA8-d4dFX-bqUhj3ItCUEBWSR9Nj4fZ3yY",
-  authDomain: "opsdep-6ca75.firebaseapp.com",
-  projectId: "opsdep-6ca75",
-  storageBucket: "opsdep-6ca75.firebasestorage.app",
-  messagingSenderId: "494928217547",
-  appId: "1:494928217547:web:8357876041853ff7ad224e",
-  measurementId: "G-YNG5CS41EQ"
+  "apiKey": "AIzaSyA8-d4dFX-bqUhj3ItCUEBWSR9Nj4fZ3yY",
+  "authDomain": "opsdep-6ca75.firebaseapp.com",
+  "projectId": "opsdep-6ca75",
+  "storageBucket": "opsdep-6ca75.firebasestorage.app",
+  "messagingSenderId": "494928217547",
+  "appId": "1:494928217547:web:8357876041853ff7ad224e",
+  "measurementId": "G-YNG5CS41EQ"
 }
