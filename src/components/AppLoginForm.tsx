@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { UserProfile, Role } from '../types';
-import { User, Lock, LogIn, AlertCircle, Eye, EyeOff, ShieldCheck } from 'lucide-react';
+import { User, Lock, LogIn, AlertCircle, Eye, EyeOff, ShieldCheck, Info } from 'lucide-react';
 
 interface AppLoginFormProps {
   profiles: UserProfile[];
@@ -138,6 +138,51 @@ export const AppLoginForm: React.FC<AppLoginFormProps> = ({
           <span className="text-[10px] text-slate-400 font-medium tracking-wide">Tjatur</span>
         </div>
       </form>
+
+      {/* Database & Multiple User Guidance Card */}
+      <div className="pt-4 border-t border-slate-100 space-y-3 text-left">
+        <div className="bg-slate-50 border border-slate-150 rounded-2xl p-3.5 space-y-2 text-[11px] text-slate-500">
+          <h3 className="font-bold text-slate-700 flex items-center gap-1.5">
+            <Info className="w-3.5 h-3.5 text-indigo-500" />
+            Petunjuk Penggunaan Banyak Akun (Multi-User)
+          </h3>
+          <p className="leading-relaxed">
+            Agar pengguna lain dapat menggunakan aplikasi dengan <strong>Gmail masing-masing</strong> namun data tetap tersimpan secara terpusat di Google Sheets Admin:
+          </p>
+          <div className="space-y-1.5 pt-1.5 border-t border-slate-200/60">
+            <p className="font-semibold text-slate-600">Langkah bagi Admin (Tjatur):</p>
+            <ol className="list-decimal pl-4 space-y-1 leading-relaxed">
+              <li>
+                Buka file Spreadsheet <strong>"Operasional Perusahaan DB"</strong> dan Folder Google Drive <strong>"Operasional Perusahaan Bukti"</strong>.
+              </li>
+              <li>
+                <strong>Bagikan akses edit</strong> (beri akses sebagai <strong>"Editor"</strong>) ke alamat Gmail masing-masing pengguna baru.
+                <p className="text-[10px] text-indigo-600 font-medium mt-0.5 bg-indigo-50/50 p-1 rounded-md border border-indigo-100/40">
+                  💡 Tips Praktis: Anda juga bisa menyetel bagikan link menjadi <em>"Siapa saja yang memiliki link dapat mengedit"</em> pada kedua file tersebut agar instan dan otomatis bagi semua pengguna!
+                </p>
+              </li>
+              <li>
+                Daftarkan email Gmail pengguna tersebut di sheet <strong>"Users"</strong> pada Spreadsheet agar sistem dapat mengenali role dan divisi mereka secara otomatis.
+              </li>
+            </ol>
+          </div>
+          <div className="pt-2 border-t border-slate-200/60">
+            <p className="leading-relaxed">
+              Setelah langkah di atas selesai, pengguna cukup login Google menggunakan Gmail mereka, dan sistem akan langsung <strong>mencocokkan email serta meloginkan mereka secara otomatis</strong> tanpa perlu mengisi password lagi!
+            </p>
+          </div>
+        </div>
+
+        {onResetGoogle && (
+          <button
+            type="button"
+            onClick={onResetGoogle}
+            className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10px] rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+          >
+            Hubungkan Akun Google Lain
+          </button>
+        )}
+      </div>
     </div>
   );
 };

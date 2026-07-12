@@ -37,7 +37,7 @@ import {
   Coins, ClipboardList, CheckCircle2, AlertCircle, Clock, Plus, LogIn,
   RefreshCw, FileSpreadsheet, Eye, Search, AlertTriangle, Check, CreditCard,
   Briefcase, MessageSquare, ExternalLink, CheckSquare, XCircle, ArrowRight,
-  Database, ArrowLeft, ArrowRightLeft, Paperclip
+  Database, ArrowLeft, ArrowRightLeft, Paperclip, Info
 } from 'lucide-react';
 
 export default function App() {
@@ -157,7 +157,27 @@ export default function App() {
         setNeedsAuth(true);
         setError('Sesi Google Anda telah berakhir atau tidak valid. Silakan hubungkan kembali Google Account Anda.');
       } else {
-        setError(err.message || 'Gagal menginisialisasi Google Workspace.');
+        const isPermissionError = err.message && (
+          err.message.includes('403') ||
+          err.message.toLowerCase().includes('permission') ||
+          err.message.toLowerCase().includes('forbidden') ||
+          err.message.toLowerCase().includes('access_denied')
+        );
+        if (isPermissionError) {
+          // Reset Google auth so they can try again once permissions are granted
+          await logout();
+          setToken(null);
+          setUser(null);
+          setNeedsAuth(true);
+          setError(
+            `Akses Ditolak (HTTP 403): Akun Google Anda (${user?.email || 'Gmail Anda'}) belum memiliki izin untuk mengakses database terpusat.\n\n` +
+            `Silakan hubungi Admin (Tjatur.sadono@gmail.com) untuk:\n` +
+            `1. Menambahkan email Google Anda ke Spreadsheet ("Operasional Perusahaan DB") dan Folder Bukti ("Operasional Perusahaan Bukti") Google Drive dengan akses sebagai "Editor (Penyunting)".\n` +
+            `2. ATAU minta Admin mengubah pengaturan berbagi kedua file tersebut menjadi "Siapa saja yang memiliki link dapat mengedit" (Anyone with link can edit).`
+          );
+        } else {
+          setError(err.message || 'Gagal menginisialisasi Google Workspace.');
+        }
       }
     } finally {
       setIsLoading(false);
@@ -190,6 +210,23 @@ export default function App() {
         );
         if (matchedProfile) {
           setUserProfile(matchedProfile);
+          return;
+        }
+      }
+
+      // Automatically match user based on logged-in Google Email if registered
+      const loggedInGoogleEmail = user?.email;
+      if (loggedInGoogleEmail) {
+        const matchedProfile = allProfs.find(
+          p => p.email?.toLowerCase().trim() === loggedInGoogleEmail.toLowerCase().trim()
+        );
+        if (matchedProfile) {
+          setUserProfile(matchedProfile);
+          try {
+            sessionStorage.setItem('op_app_logged_in_user_id', matchedProfile.userId);
+          } catch (e) {
+            // ignore
+          }
           return;
         }
       }
@@ -244,7 +281,21 @@ export default function App() {
         setNeedsAuth(false);
       }
     } catch (err: any) {
-      setError('Login gagal. Pastikan Anda menyetujui izin Google Sheets dan Drive.');
+      console.error('Login error detail:', err);
+      const isPopupClosed = err.code === 'auth/popup-closed-by-user' || (err.message && err.message.includes('popup-closed-by-user'));
+      if (isPopupClosed) {
+        setError(
+          "Login dibatalkan atau jendela ditutup sebelum selesai.\n\n" +
+          "💡 Tips agar login berhasil:\n" +
+          "1. Buka aplikasi di Tab Baru (klik ikon 'Open in new tab' di kanan atas preview) agar browser tidak memblokir popup login.\n" +
+          "2. Pastikan Anda tidak menutup jendela popup Google yang muncul.\n" +
+          "3. Jika ada ikon pemblokir popup di bilah alamat browser, pilih 'Selalu izinkan pop-up' untuk situs ini."
+        );
+      } else {
+        const errMsg = err.message || err.toString();
+        const errCode = err.code ? ` [${err.code}]` : '';
+        setError(`Login gagal: ${errMsg}${errCode}. Pastikan Anda menyetujui izin Google Sheets dan Drive, serta pastikan domain aktif Anda sudah diizinkan di Firebase Console.`);
+      }
     } finally {
       setIsLoggingIn(false);
     }
@@ -709,9 +760,9 @@ export default function App() {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-100 text-red-600 rounded-2xl p-3 text-xs flex items-start gap-2 text-left">
+            <div className="bg-red-50 border border-red-100 text-red-600 rounded-2xl p-4 text-xs flex items-start gap-2 text-left">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-500" />
-              <span>{error}</span>
+              <span className="whitespace-pre-line leading-relaxed">{error}</span>
             </div>
           )}
 
@@ -737,6 +788,23 @@ export default function App() {
               </>
             )}
           </button>
+
+          <div className="bg-slate-50 border border-slate-150 rounded-2xl p-3.5 text-left text-[11px] text-slate-500 space-y-2">
+            <h3 className="font-bold text-slate-700 flex items-center gap-1.5">
+              <Info className="w-3.5 h-3.5 text-indigo-500" />
+              Sistem Database Terpusat (Centralized)
+            </h3>
+            <p className="leading-relaxed">
+              Aplikasi ini menggunakan <strong>satu database Google Sheets terpusat</strong> milik Administrator untuk seluruh pengguna.
+            </p>
+            <div className="pt-2 border-t border-slate-200/60 space-y-1">
+              <p className="font-semibold text-slate-600">Langkah untuk Pengguna:</p>
+              <ul className="list-disc pl-4 space-y-0.5 leading-relaxed">
+                <li>Gunakan akun Gmail pribadi/kerja Anda untuk masuk.</li>
+                <li>Pastikan Admin telah membagikan akses edit (Editor) pada Google Sheet & Google Drive bukti transaksi ke email Anda.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     );
