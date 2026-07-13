@@ -1,10 +1,13 @@
 {
-  "projectId": "absolute-portfolio-q2t1j",
-  "appId": "1:484842808437:web:6cb7af4c52c397acd1843c",
-  "apiKey": "AIzaSyCL4lKELx49xwrqsx_VRD7Rim_FURjfkXA",
-  "authDomain": "absolute-portfolio-q2t1j.firebaseapp.com",
-  "storageBucket": "absolute-portfolio-q2t1j.firebasestorage.app",
-  "messagingSenderId": "484842808437",
-  "measurementId": "",
-  "oAuthClientId": "484842808437-g3nc7jkgbm1k24akkbumc4bol751d1i5.apps.googleusercontent.com"
+  "type": "service_account",
+  "project_id": "opsdep",
+  "private_key_id": "16b595c8d2d7587faec30e8a45e4f4072e1bcbc7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCZT8J2p5li8bRX\n7NCmnvG0Feu7Bz9pwcNhqb/8Dbe6aHyGP6NdwGorYJ0F3anCRVI7ryLO/51Fvr5P\nBKQ0Arpnq84SMtHD+spy6zpoIrlpZ5L6uNeTii+Gr5kSLv6I7X1MemLxJT37C7Di\n3XFsB6By5UxS7qT+wBpLuptPvXM98CE/j/X+B0Dl67h12I4e3rMIbrlybD9susiz\nP6g0xdsigz2zAZi6F+ACHdHaMn9l7qv4AaRBdNS2e0GdT2zyoa8drTYaNc/mCoHN\nZO5jcDnIq16Ld2b7Ab0FpsuyZ+Y1PvijLoifc4S1QmRdCf/NnJTmg5XGFEgL1i6X\nz0nqbeZvAgMBAAECggEAAQdSEJXvFDgqU7BKj0hst1HlIX2a25ywF2UnEEvCELWa\n9EZtoN2yhXT7lYQw6Eh3yBLuPFsZrocCyg8habOE/AutviodUl/J4O7nSh1fIHzQ\nTyKGi75dgEO7ieD+PMpYt10kC2ZXd2o5XX3kp2r+4bAPjLtK9X/Lc8U311drJ2se\ndrxTRsqcTMhRj/jLSmggj1yO5won97xLK3TOsVVn1+mITmnGmm8Lo6G4lU0qd7sg\ng3fdcMFAgVRKvQBg3bv8+nhAO61bt1pGphzq98NavbDrJHa0odJO+2cENQG/L1CK\nDqDdGntkKfU/rh/HRxtmKhbvziKD40vlj2V0lQxvmQKBgQDMMhAbUxrjA34sF0t3\n3PZQHf/YgHsMaCgp2lXRFuKYYTyOrVautkqX+hjmJQ2tBjEiSiUxkR3z0EHW5Qxg\nzeuEPJcBBgZuMI3XLBIYpmzR0YaLGUxm+yFVCC0UR7/WOcbRuUE/WmkKJKGUBlIj\n5r5DAtZWFvOihnecy/j7QujSCQKBgQDANOv25TXn0LfBLosv/alo+jNWyWLJAFhW\ncuwy6H/j1/A2xKUGMEE3VcSir0sIdq7IJ1Ldkmr8+Rb3+BAfWV7T67lmjP/vWwPq\nCjMscPaJao/+BCjZJmVEALybg9XFbEnh4cOF2ghqD0Cq+e/s2k5azcjoMZcOUBsO\nzUiby6oytwKBgQCdrLK/RsbmMRZGmZ5O6jLQ3rlmxp89j1gkKVJG6HME02Ddk3/x\n3RVwkVCUtlv/FV7vaW2a/sGwOUn91FRgk+Ge9OJtieeBQsDkPEWk/y3cPvyzgE98\n3cJ5VJzqohTCKU8bNv/pGbkueebC1LasvkqAmDpFs+dhwo+uZdrWum3pcQKBgB/S\nIyay9+OzGFjxPbXqRvvMQGej26jvV7CoQhaDi3jLLUfD8pY9su5YUr+kScXS8EjO\nyddJAFF1Y6oV9YVbJGntYrppqY2VAebjXWmEIizJ6aDiS2j4BFfnz1Hn16JhtTGi\nUN5+JFp6v/gOfPw3gDVkUFiwrRN/i5s9vUGdzEWtAoGBAMeens54KzJh2UFVtxJx\nhDkOog8e1Gu7KREPku0dVx51TXP2eAEjguqhntGY/HSkEz1HKvvrUiO2/Keu4WXE\nIWv8hof4KivL2c3hVu/npC0C+6tUZ0fau9W2QJOW4MuuWyhS/3u/Zcmxx/k27qZV\nO9nIq3A3Q/Sle7JKU2uL1K1R\n-----END PRIVATE KEY-----\n",
+  "client_email": "opsdep@opsdep.iam.gserviceaccount.com",
+  "client_id": "100874231119814759388",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/opsdep%40opsdep.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
 }
